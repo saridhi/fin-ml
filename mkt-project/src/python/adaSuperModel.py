@@ -260,7 +260,7 @@ def send_mail(to_guy, to_addr, text, html, subject):
             msg.attach(part2)
             msg.set_unixfrom('SuperModel')
             msg['To'] = email.utils.formataddr((to_guy, to_addr))
-            msg['From'] = email.utils.formataddr(('SuperModel', 'ashish.rastogi@gmail.com'))
+            msg['From'] = email.utils.formataddr(('SuperModel', 'dhiren.sarin@gmail.com'))
             msg['Subject'] = subject
 
             server = smtplib.SMTP(servername)
@@ -276,7 +276,7 @@ def send_mail(to_guy, to_addr, text, html, subject):
                     server.ehlo() # re-identify ourselves over TLS connection
 
                 server.login(username, password)
-                server.sendmail('ashish.rastogi@gmail.com', [to_addr], msg.as_string())
+                server.sendmail('dhiren.sarin@gmail.com', [to_addr], msg.as_string())
             finally:
                 server.quit()
 
@@ -460,8 +460,6 @@ def adaModel():
     print plain_string
     print 'done', datetime.datetime.today()
     subject = 'Supermodel suggestions on ' + str(datetime.date.today())
-    send_mail('Ashish Rastogi', 'ashish.rastogi@gmail.com', plain_string, htmlString, subject)
-    send_mail('Abhimanyu Yadav', 'abhi.yadav@gmail.com', plain_string, htmlString, subject)
     send_mail('Dhiren Sarin', 'dhiren.sarin@gmail.com', plain_string, htmlString, subject)
      
 if __name__=="__main__":
