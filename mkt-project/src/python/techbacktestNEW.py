@@ -343,14 +343,6 @@ def calculateSharpe(arrayReturns = [], arrayDates = [], nbdays = 0):
 def main():
         from techseries import acTechSeries
         t = acTechSeries('EUR', 'GBP', 6156, 'D')
-        #t.RawData()
-        #calculateSharpe([2,3,4], [)
-        #print 'got the ac data'
-        #t.isDowntrend()
-        #t.isUptrend()
-        #print 'got the up and down trends'
-        #print hPerformance(t,paramsArray = [{'SignalName':'Doji in a downtrend', 'Value1':25, 'Value2':0, 'Type':'Buy', 'Operator':'Entry Signal'}])
-        #print hPerformance(t,paramsArray = [{'SignalName':'ADX above level', 'Value1':7, 'Value2':20, 'Type':'Buy', 'Operator':'Entry Signal'}])
         print hPerformance(t,paramsArray = [{'Operator': 'Entry Signal', 'Type': 'Buy', 'Value2': 0, 'Value1': 25, 'SignalName': 'RSI'}, {'Operator': 'Precondition', 'Type': 'Buy', 'Value2': 20, 'Value1': 7, 'SignalName': 'ADX above level'}],dayexit=25,horizon=4854,calculateAvg=True,pullback=0.0,stoploss=False)
         print hPerformance(t,paramsArray = [{'SignalName':'Doji in a downtrend', 'Value1':25, 'Value2':0, 'Type':'Buy', 'Operator':'Entry Signal'},
                                                                 {'SignalName':'Bullish Key Reversal', 'Value1':7, 'Value2':20, 'Type':'Buy', 'Operator':'Precondition'}],dayexit=25,horizon=4854,calculateAvg=True,pullback=0.0,stoploss=False)
