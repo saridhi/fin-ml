@@ -4,7 +4,7 @@ Repository for machine learning related algorithms with a focus on financial tim
 Below is the description of folders in the repo root:
 
 - deep-learning: 
-This contains a selection of five projects completed towards the Udacity Deep Learning Nanodegree using Neural Networks, GAN, RNN, NLP embeddings, and Reinforcement Learning
+This contains a selection of five projects completed towards the Udacity Deep Learning Nanodegree using Neural Networks, GAN, CNN, RNN, NLP embeddings, and Reinforcement Learning
 
 - whitepapers: 
 A selection of relevant papers that coincide with my interest, and also proposals/papers that I have written in order to pursue further reseearch
