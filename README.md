@@ -13,9 +13,9 @@ A selection of relevant papers that coincide with my interest, and also proposal
 Following a Machine Learning refresher, some octave scripts to cover different parts of Machine Learning from SGD, Logistic Regressions, SVM, and K-means
 
 - fx-arb:
-A small project to determine if, given a csv and specified format, there is an arbitrage opportunity
+A small project to determine if, given a csv and specified format, there is an arbitrage opportunity for various FX rates:w
 
 - mkt-project:
-At-home hobby project to unravel the challenge of financial timeseries forecasting. This contains various modules built away from my professional career, to explore the potential of domain knowledge applied to feature engineering in financial markets.
+At-home hobby project to unravel the challenge of financial timeseries forecasting. This contains various modules built away from my professional career, to explore the potential of domain knowledge applied to feature engineering in financial markets. Algorithmic development includes Machine and Statistical learning approaches.
 
 
