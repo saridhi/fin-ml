@@ -9,13 +9,13 @@ This contains a selection of five projects completed towards the Udacity Deep Le
 - whitepapers: 
 A selection of relevant papers that coincide with my interest, and also proposals/papers that I have written in order to pursue further reseearch
 
-- ml-octave
+- ml-octave:
 Following a Machine Learning refresher, some octave scripts to cover different parts of Machine Learning from SGD, Logistic Regressions, SVM, and K-means
 
-- fx-arb
-A small project to determine if, given a csv and specified format, there is an arbitrage opportunity
+- fx-arb:
+A small project to determine if, given a csv and specified format, there is an arbitrage opportunity for various FX rates:w
 
-- mkt-project
-At-home hobby project to unravel the challenge of financial timeseries forecasting. This contains various modules built away from my professional career, to explore the potential of domain knowledge applied to feature engineering in financial markets.
+- mkt-project:
+At-home hobby project to unravel the challenge of financial timeseries forecasting. This contains various modules built away from my professional career, to explore the potential of domain knowledge applied to feature engineering in financial markets. Algorithmic development includes Machine and Statistical learning approaches.
 
 
