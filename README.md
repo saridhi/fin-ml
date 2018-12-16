@@ -19,6 +19,6 @@ A small project to determine if, given a csv and specified format, there is an a
 A small project to determine, given a dataset of users and transactions, a transaction is fraudulent. Involves feature engineering, sql programming, modeling and evaluation. 
 
 - mkt-project:
-At-home hobby project to unravel the challenge of financial timeseries forecasting. This contains various modules built away from my professional career, to explore the potential of domain knowledge applied to feature engineering in financial markets. Algorithmic development includes Machine and Statistical learning approaches.
+At-home hobby project to unravel the challenge of financial timeseries forecasting. This contains various functions and classes built away from my professional career, to explore the potential of domain knowledge applied to feature engineering in financial markets. Algorithmic development includes experimenting with Machine and Statistical learning approaches using both R and Python.
 
 
