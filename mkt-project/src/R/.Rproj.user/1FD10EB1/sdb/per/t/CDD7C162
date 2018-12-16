@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#'Read manifest files from a directory to identify data sources\n#'@param path to manifest files\n#'@return DataReader object\n#'@examples\n#'dr <- ManifestReader()\nManifestReader <- function(path = \"/Users/dhirensarin/Dev/project-ada/data/configs\"){\n  files <- list.files(path)\n  json_data <- list()\n  for (i in files) {\n    print(i)\n    json_data[[i]] <- fromJSON(file=paste0(path, \"/\", i))\n  }\n  class(json_data) <- \"ManifestReader\"\n  return (json_data)\n}\n\n#' Generic Function dispatch to get appropriate data source by Id\ngetDataReader <- function (x, ...) {\n  UseMethod(\"getDataReader\", x)\n}\n\n#' Generic Function dispatch to get appropriate data source by Id\ngetFeatureReader <- function (x, ...) {\n  UseMethod(\"getFeatureReader\", x)\n}\n\n#'Fetch DataReader object given a raw_data_id\ngetDataReader.ManifestReader <- function(x, dataset_id=\"quandl:wiki/eod\") {\n  for (i in x) {\n    if (i$dataset_id == dataset_id) {\n      class(i) <- \"DataReader\"\n      return (i)\n    }\n  }\n}\n\n#'Fetch vector of feature names for a given algorithm id\ngetFeatureReader.ManifestReader <- function(x, features_id=\"knn_1\") {\n  for (i in x) {\n    if (i$features_id == features_id) {\n      class(i) <- \"FeatureReader\"\n      return (i)\n    }\n  }\n}\n",
+    "created" : 1499983893956.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2415377300",
+    "id" : "CDD7C162",
+    "lastKnownWriteTime" : 1497999879,
+    "last_content_update" : 1497999879,
+    "path" : "~/Dev/project-ada/src/R/ManifestReader/ManifestReader.R",
+    "project_path" : "ManifestReader/ManifestReader.R",
+    "properties" : {
+    },
+    "relative_order" : 14,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

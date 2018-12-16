@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(rjson)\nlibrary(data.table)\nlibrary(memoise)\nlibrary(zoo)\nlibrary(magrittr)\nlibrary(quantmod)\nlibrary(ini)\nsource('ManifestReader/DataReader.R')\nsource('ManifestReader/ManifestReader.R')\nsource('FeatureEngineer/Rule.R')\n\nmanifest_reader <- ManifestReader()\nstocks_reader <- getDataReader(manifest_reader, \"quandl:wiki/eod_short\")\nvix_reader <- getDataReader(manifest_reader, \"cboe:vix\")\n\nvix_reader %>% listTickers()\nnflx_series <- getTimeSeries(stocks_reader, ticker = 'NFLX')\nvix_series <- getTimeSeries(vix_reader, ticker = 'vix', fields = c('open', 'high', 'low', 'close'))\n\nsnp_reader <- getDataReader(manifest_data, \"yahoo:snp_500\")\nsnp_series <- getTimeSeries(snp_reader, ticker = NULL)\n\n#rsi_series can act as a feature. \n#rsi_series values example: 32.15, 33.25, 60.20 etc\nrsi_series <- RSI(nflx_series[,4], 9)\nrsi_rule <- Rule(nflx_series, rsi_series)\n#rsi_trade_signal can act as a feature. This is categorical rather than continuous.\n#rsi_trade_signal values example: 1, 1, 1, 0, -1, -1, 1 etc.\nrsi_trade_signal <- getTradeSignal(rsi_rule, buy_threshold=20, sell_threshold=80)\n\n#ma_series - Moving average can act as a feature\nma_series <- SMA(nflx_series[,'close'], 21)\nma_rule <- Rule(nflx_series, ma_series)\nma_trade_signal <- getTradeSignal(ma_rule, buy_threshold=ma_series, sell_threshold=ma_series)\n\nbb_series <- BBands(nflx_series[,c('high', 'low', 'close')], n=21)\nbb_rule <- Rule(nflx_series, bb_series)\nbb_trade_signal <- getTradeSignal(bb_rule, buy_threshold = bb_series$dn, sell_threshold=bb_series$up,\n                                  use_indicator = FALSE)\n\n\n\nbacktest_rsi <- Backtest(nflx_series$close, rsi_trade_signal)\nbacktest_result <- backtest_rsi %>% doBacktest()\n\ndygraph(cumsum(backtest_result$returns))\n",
+    "created" : 1500230963488.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "102201952",
+    "id" : "BE188B16",
+    "lastKnownWriteTime" : 1500331762,
+    "last_content_update" : 1500331762,
+    "path" : "~/Dev/project-ada/src/R/test/test_DataReader.R",
+    "project_path" : "test/test_DataReader.R",
+    "properties" : {
+    },
+    "relative_order" : 15,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "{\n    \"features_id\": \"knn_ma\",\n    \"feature_columns\": {\n\t    \"RSI_rule\": {\n\t      \"feature_type\":\"RSI_rule\",\n\t      \"overbought\":80,\n\t      \"oversold\":20,\n\t      \"period\":9\n\t    },\n\t    \"ADX_rule\": {\n\t      \"feature_type\":\"ADX_rule\",\n\t      \"period\":7,\n\t      \"trending\":20\n\t    },\n\t    \"SMA_rule_21\":{\n\t      \"feature_type\":\"SMA_rule\",\n\t      \"period\":21\n\t    },\n\t    \"SMA_rule_10\":{\n\t      \"feature_type\":\"SMA_rule\",\n\t      \"period\":10\n\t    },\n\t    \"SMA_rule_60\":{\n\t      \"feature_type\":\"SMA_rule\",\n\t      \"period\":60\n\t    },\n\t    \"SMA_rule_100\":{\n\t      \"feature_type\":\"SMA_rule\",\n\t      \"period\":100\n\t    }\n    },\n    \"frequency\": \"DAILY\"\n}\n",
+    "created" : 1499027896849.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1702308790",
+    "id" : "EC896583",
+    "lastKnownWriteTime" : 1499027923,
+    "last_content_update" : 1499027923258,
+    "path" : "~/Dev/project-ada/features/configs/knn_ma.json",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "json"
+}

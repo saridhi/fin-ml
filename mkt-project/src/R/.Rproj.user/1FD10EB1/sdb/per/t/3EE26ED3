@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#'Class to store timeseries objects\n#'@param path to json\n#'@return DataReader object\n#'@examples\n#'dr <- DataReader()\nRule <- function(time_series, indicator_series){\n  object <- list(time_series=time_series, indicator_series=indicator_series)\n  class(object) <-\"Rule\"\n  return (object)\n}\n\n#' Generic Function dispatch\ngetTradeSignal <- function (x, ...) {\n  UseMethod(\"getTradeSignal\", x)\n}\n\n\n#'Create Trade signal given asset price series and indicator series\n#'@param use_indicator boolean for whether to use indicator as trade signal or the underlying series as a trade signal\n#'@return zoo\ngetTradeSignal.Rule <- function(x, buy_threshold, sell_threshold, hold_threshold=0,\n                                use_indicator = TRUE) {\n  if (use_indicator) {\n    ts <- x$indicator_series\n  } else {\n    ts <- x$time_series[,'close']\n  }\n  ts_copy <- ts\n  ts_copy[index(ts_copy)] <- 0\n  ts_copy[index(ts[ts>sell_threshold])] <- (-1)\n  ts_copy[index(ts[ts<buy_threshold])] <- 1\n  ts_copy\n}\n\n",
+    "created" : 1498425089137.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4286380140",
+    "id" : "3EE26ED3",
+    "lastKnownWriteTime" : 1498160734,
+    "last_content_update" : 1498160734,
+    "path" : "~/Dev/project-ada/src/R/FeatureEngineer/Rule.R",
+    "project_path" : "FeatureEngineer/Rule.R",
+    "properties" : {
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

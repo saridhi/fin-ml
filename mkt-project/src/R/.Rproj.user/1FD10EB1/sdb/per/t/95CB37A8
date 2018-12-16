@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ini)\n\n#'Read data from a specified JSON\n#'@param path to json\n#'@return DataReader object\n#'@examples\n#'dr <- DataReader()\nDataReader <- function(path = \"/Users/dhirensarin/Dev/project-ada/data/configs/wiki_eod_short.json\"){\n  json_data <- fromJSON(file=path)\n  class(json_data) <- \"DataReader\"\n  return (json_data)\n}\n\n#' Generic Function dispatch\ngetTimeSeries <- function (x, ...) {\n  UseMethod(\"getTimeSeries\", x)\n}\n\n#' Generic Function dispatch\nlistTickers <- function (x, ...) {\n  UseMethod(\"listTickers\", x)\n}\n\n#' Read CSV and store in memory\nreadCsv.uncached <- function(x) {\n  prop_contents <- ini::read.ini('../../properties/properties.cfg')\n  csv_names <- paste0(prop_contents$`Data Paths`$base_path, x$relative_path)\n  csv_contents <- NULL\n  \n  for (csv_name in csv_names) {\n    if ((file.info(csv_name)$size) > 5000000) {\n      csv_contents <- rbind(csv_contents, fread(file=csv_name, header = TRUE))\n    } else {\n      csv_contents <- rbind(csv_contents, read.csv(csv_name))\n    }\n  }\n  csv_contents <- data.frame(csv_contents)\n  columns <- sub(' ', '.', x$attribute_columns)\n  if (is.null(x$ticker_column)) {\n    csv_contents <- csv_contents[,c(x$date_column, columns)]\n  } else {\n    ticker <- x$ticker_column\n    csv_contents <- csv_contents[,c(x$date_column, ticker, columns)]\n  }\n  \n  #csv_contents <- csv_contents[order(x$date_column),] \n  \n  if ((x$rename_map[1]) == 'toLowerCase') {\n    colnames(csv_contents) <- c(x$date_column, tolower(columns))\n  }\n  else {\n    renamed_fields <- sub(' ', '.',names(x$rename_map))\n    colnames(csv_contents)[colnames(csv_contents) %in% renamed_fields] <- as.character(x$rename_map)\n  }\n  csv_contents\n}\nif (!exists(\"readCsv\")) readCsv <- memoise(readCsv.uncached) \n\n#'Fetch specific ticker history from flat file\n#'@return zoo\ngetTimeSeries.DataReader <- function(x, ticker = \"A\", fields = c('open', 'high', 'low', 'close', 'volume'), \n                                     start_date = as.Date('2005-01-01'), \n                                     end_date = Sys.Date(), \n                                     frequency = x$frequency) {\n  csv_contents <- readCsv(x)\n  if (is.null(ticker)) {\n    df <- csv_contents[, c(x$date_column, fields)]\n  } else {\n    df <- tryCatch({\n      csv_contents[csv_contents[x$ticker_column] == ticker, c(x$date_column, fields)]\n    }, error = function(e) {\n      csv_contents[, c(x$date_column, fields)]\n    })\n  }\n  numeric.series <- apply(df[,2:NCOL(df)], 2, as.numeric)\n  \n  #Check date format\n  if (sum(is.na(as.Date(df[,1]))) > 100) {\n    df[,1] <- gsub(\"[0-9]{2}([0-9]{2})$\", \"\\\\1\", df[,1]) \n    dates <- as.Date(df[,1], format = \"%m/%d/%y\")\n  } else {\n    dates <- as.Date(df[,1])\n  }\n  \n  series.zoo <- zoo(numeric.series, order.by = dates)\n  window(series.zoo, start=start_date, end=end_date)\n}\n\n#'List all unique tickers from flat file\nlistTickers.DataReader <- function(x) {\n  csv_contents <- readCsv(x)\n  if (is.null(x$ticker_column)) {\n    return (x$raw_data_id)\n  } else {\n    return (unique(csv_contents[x$ticker_column]))\n  }\n}\n\n",
+    "created" : 1499983728535.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2364866072",
+    "id" : "95CB37A8",
+    "lastKnownWriteTime" : 1500331762,
+    "last_content_update" : 1500331762,
+    "path" : "~/Dev/project-ada/src/R/ManifestReader/DataReader.R",
+    "project_path" : "ManifestReader/DataReader.R",
+    "properties" : {
+    },
+    "relative_order" : 13,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

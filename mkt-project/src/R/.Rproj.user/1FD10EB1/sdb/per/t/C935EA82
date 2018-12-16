@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(rjson)\nlibrary(data.table)\nlibrary(memoise)\nlibrary(zoo)\nlibrary(magrittr)\nlibrary(quantmod)\nlibrary(dygraphs)\nlibrary(ini)\nlibrary(PerformanceAnalytics)\nlibrary(caret)\nsource('ManifestReader/DataReader.R')\nsource('ManifestReader/ManifestReader.R')\nsource('ManifestReader/FeatureReader.R')\nsource('MLAlgorithms/KNN_Algo.R')\nsource('FeatureEngineer/Rule.R')\nsource('FeatureEngineer/FeatureEngineer.R')\nsource('Backtest.R')\n\nmanifest_data <- ManifestReader(path = \"/Users/dhirensarin/Dev/project-ada/data/configs\")\nmanifest_features <- ManifestReader(path = \"/Users/dhirensarin/Dev/project-ada/features/configs\")\nknn_features <- getFeatureReader(manifest_features, 'knn_1')\n\ndata_reader <- getDataReader(manifest_data, \"quandl:wiki/eod_short\")\nsnp_reader <- getDataReader(manifest_data, \"yahoo:snp_500\")\nvix_reader <- getDataReader(manifest_reader, \"cboe:vix\")\n\nvix_series <- getTimeSeries(vix_reader, ticker = 'vix', fields = c('open', 'high', 'low', 'close'))\ntime_series <- getTimeSeries(data_reader, ticker = 'NFLX')\nsnp_series <- getTimeSeries(snp_reader, ticker = NULL)\n\n'The function call below returns a time series like:\n            RSI_rule  RSI       SMA_rule\n2017-05-16        -1 65.15046       1\n2017-05-17        0 43.61202        1\n2017-05-18        0 50.95530        -1 \n'\nfeatures <- create_features(time_series, feature_reader = knn_features)\ntargets <- create_targets(time_series)\n\ndata_set <- na.omit(na.locf(merge(features, targets)))\nknn_predictions <- doKnn(data_set, retrain_gap=500)\nbacktest_knn <- Backtest(time_series$close, knn_predictions)\nbacktest_result <- backtest_knn %>% doBacktest()\n\ndygraph(merge(cumsum(backtest_result$returns), cumsum(na.fill(Delt(time_series$close), 0))))\ndygraph(cumsum(backtest_result$returns))\n",
+    "created" : 1496777483039.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "378905123",
+    "id" : "C935EA82",
+    "lastKnownWriteTime" : 1501537785,
+    "last_content_update" : 1501537785222,
+    "path" : "~/Dev/project-ada/src/R/test/test_FeatureEngineer.R",
+    "project_path" : "test/test_FeatureEngineer.R",
+    "properties" : {
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

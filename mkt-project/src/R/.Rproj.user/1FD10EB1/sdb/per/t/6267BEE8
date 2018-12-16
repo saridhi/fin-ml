@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(quantmod)\n\n#'Library of relevant indicators to build features for the ML algorithms.\n#'These are lightweight helper functions.\n\n#'Generic Function to calculate percent distance between indicator and price\n#'@param type 'Percent' or 'Price'\n#'@return zoo\nma_distance_from_px <- function (time_series, ma_series, type='Percent') {\n  if (type=='Percent') {\n    (time_series-ma_series)/ma_series\n  } else {\n    time_series-ma_series\n  }\n}\n",
+    "created" : 1498425096237.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1073959640",
+    "id" : "6267BEE8",
+    "lastKnownWriteTime" : 1500331762,
+    "last_content_update" : 1500331762,
+    "path" : "~/Dev/project-ada/src/R/FeatureEngineer/Indicators.R",
+    "project_path" : "FeatureEngineer/Indicators.R",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

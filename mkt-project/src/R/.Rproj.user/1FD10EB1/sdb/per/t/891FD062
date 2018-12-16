@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ini)\n\n#'Read features from a specified JSON\n#'@param path to json\n#'@return DataReader object\n#'@examples\n#'dr <- DataReader()\nFeatureReader <- function(path = \"/Users/dhirensarin/Dev/project-ada/features/configs/knn_technical.json\"){\n  json_data <- fromJSON(file=path)\n  class(json_data) <- \"FeatureReader\"\n  return (json_data)\n}\n\n#' Generic Function dispatch\ngetFrequency <- function (x, ...) {\n  UseMethod(\"getFrequency\", x)\n}\n\n#' Generic Function dispatch\ngetColumns<- function (x, ...) {\n  UseMethod(\"getColumns\", x)\n}\n\n#'Fetch specific ticker history from flat file\n#'@return zoo\ngetFrequency.FeatureReader <- function(x) {\n  return (x$frequency)\n}\n\n#'Fetch specific ticker history from flat file\n#'@return zoo\ngetColumns.FeatureReader <- function(x) {\n  return (x$feature_columns)\n}\n\n",
+    "created" : 1499983724277.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2933201481",
+    "id" : "891FD062",
+    "lastKnownWriteTime" : 1497999879,
+    "last_content_update" : 1497999879,
+    "path" : "~/Dev/project-ada/src/R/ManifestReader/FeatureReader.R",
+    "project_path" : "ManifestReader/FeatureReader.R",
+    "properties" : {
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

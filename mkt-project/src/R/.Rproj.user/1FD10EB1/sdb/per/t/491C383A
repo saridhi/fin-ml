@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "{\n    \"raw_data_id\": \"wiki/eod\",\n    \"source_id\": \"quandl\",\n    \"dataset_id\": \"quandl:wiki/eod_short\",\n    \"attribute_columns\": [\n\t\"adj_open\",\n\t\"adj_high\",\n\t\"adj_low\",\n\t\"adj_close\",\n\t\"adj_volume\"\n    ],\n    \"rename_map\": {\n      \"adj_open\": \"open\",\n      \"adj_high\": \"high\",\n      \"adj_low\": \"low\",\n      \"adj_close\": \"close\",\n      \"adj_volume\": \"volume\"\n    },\n    \"date_column\": \"date\",\n    \"ticker_column\": \"ticker\",\n    \"data_type\": \"ASSET_TIME_SERIES\",\n    \"frequency\": \"DAILY\",\n    \"relative_path\": \"wiki_eod/wiki_eod_short.csv\"\n}\n",
+    "created" : 1500322960384.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1055210738",
+    "id" : "491C383A",
+    "lastKnownWriteTime" : 1498073817,
+    "last_content_update" : 1498073817,
+    "path" : "~/Dev/project-ada/data/configs/wiki_eod_short.json",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 16,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "json"
+}

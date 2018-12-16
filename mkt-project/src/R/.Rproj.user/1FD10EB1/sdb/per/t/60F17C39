@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#'Class to backtest given a time_series and trade signals\n#'@param closes of asset\n#'@param trade_signals timeseries of buy/sell signals \n#'@return Backtest object\n#'@examples\nBacktest <- function(closes, trade_signals){\n  object <- list(closes=closes, trade_signals=trade_signals)\n  class(object) <-\"Backtest\"\n  return (object)\n}\n\n#' Generic Function dispatch\ndoBacktest <- function (x, ...) {\n  UseMethod(\"doBacktest\", x)\n}\n\n\n#'Perform backtest\n#'@param risk_manager object that contains position sizes and logic for stoplosses/take profit\n#'@return performance object containing information on strategy performance\ndoBacktest.Backtest <- function(x, risk_manager=NULL, return_type='Percent') {\n  changes <- Delt(x$closes)\n  signals <- lag(x$trade_signals, -1)\n  list(returns = signals * changes,\n       no_of_trades = sum(diff(x$trade_signals)!=0),\n       sharpe = SharpeRatio(na.omit(signals * changes)))\n}\n\n",
+    "created" : 1498078572627.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4077219737",
+    "id" : "60F17C39",
+    "lastKnownWriteTime" : 1500331762,
+    "last_content_update" : 1500331762,
+    "path" : "~/Dev/project-ada/src/R/Backtest.R",
+    "project_path" : "Backtest.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

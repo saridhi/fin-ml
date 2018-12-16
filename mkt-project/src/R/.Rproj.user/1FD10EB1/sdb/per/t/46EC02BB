@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "{\n    \"raw_data_id\": \"vix\",\n    \"source_id\": \"cboe\",\n    \"dataset_id\": \"cboe:vix\",\n    \"attribute_columns\": [\n\t\"VIX Open\",\n\t\"VIX High\",\n\t\"VIX Low\",\n\t\"VIX Close\"\n    ],\n    \"rename_map\": {\n\t\"VIX Open\": \"open\",\n\t\"VIX High\": \"high\",\n\t\"VIX Low\": \"low\",\n\t\"VIX Close\": \"close\"\n    },\n    \"date_column\": \"Date\",\n    \"frequency\": \"DAILY\",\n    \"relative_path\": [\n\t\"cboe/vix_post_sep_2003.csv\",\n\t\"cboe/vix_pre_sep_2003.csv\"\n    ]\n}\n",
+    "created" : 1500230931306.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1919033860",
+    "id" : "46EC02BB",
+    "lastKnownWriteTime" : 1498073817,
+    "last_content_update" : 1498073817,
+    "path" : "~/Dev/project-ada/data/configs/cboe_vix.json",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 14,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "json"
+}

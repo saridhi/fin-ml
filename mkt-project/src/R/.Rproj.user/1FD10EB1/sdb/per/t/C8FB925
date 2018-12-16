@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "### Light Documentation\n\nHere, we provide some light documentation on the various functions and S3 Classes\n\n#### Data Reader\n\nOur data assets are managed via lightweight manifest descriptions that\nare in the JSON format.\n\n* `DataReader.R`: defines a class that exposes a\n  lightweight manager for manifest objects. Given the source of the JSON file, a representative   object is returned which can be queried for data.\n  \n* `Rule.R`: defines a class that is used to create Trading Rules that can act as features.\n\n* `Indicators.R`: helper class to generate various indicators that can act as features.",
+    "created" : 1496685836961.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1275155700",
+    "id" : "C8FB925",
+    "lastKnownWriteTime" : 1497390885,
+    "last_content_update" : 1497390885,
+    "path" : "~/Dev/project-ada/src/R/README.md",
+    "project_path" : "README.md",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}

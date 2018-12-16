@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(caret)\nlibrary(e1071)\n\n#'KNN algorithm to sequentially determine predictions in a time_series as a classification problem\n#'Training is performed on a rolling basis with feature data scaled\n#'@param data_set matrix\n#'@param retrain_gap retrain every x periods\n#'@return time_series of predictions\ndoKnn <- function(data_set, retrain_gap=100) {\n  preProcessParams <- preProcess(as.data.frame(data_set[,1:(NCOL(data_set)-1)]), method=c('scale'))\n  trained_model <- NULL\n  predictions <- rollapplyr(data_set, NROW(data_set), by.column=FALSE, partial=TRUE, by=retrain_gap,\n                            function(x, preProcessParams, retrain_gap) {\n                              if (NROW(x)<20) { #Threshold for minimum samples needed\n                                #trained_model <<- NULL\n                                return (0)\n                              } else {\n                                #if (is.integer(NROW(x)/retrain_gap) | is.null(trained_model)) {\n                                trained_model <- knn_train_model(x[1:NROW(x)-1,], preProcessParams)\n                                #} \n                                prediction <- predict(object=trained_model, \n                                                      as.data.frame(x[(NROW(x)-retrain_gap):NROW(x),(1:(NCOL(x)-1))]))\n                                print(NROW(x))\n                                if (retrain_gap==1) {\n                                  prediction <- prediction[2]\n                                } else {\n                                  prediction\n                                }\n                                as.numeric(as.character(prediction))\n                              }\n                            }, preProcessParams = preProcessParams, retrain_gap=retrain_gap)\n  zoo(as.vector(predictions), order.by=index(data_set))\n}\n\n\n#'Function to train knn model\n#'@param data_subset applied on a rolling basis\n#'@param preProcessParams any instructions to scale/center data etc\n#'@return trained model\nknn_train_model <- function(data_subset, preProcessParams = NULL) {\n  train_series <- predict(preProcessParams, data_subset[,1:(NCOL(data_subset)-1)])\n  trained_model <- train(data_subset[,1:(NCOL(data_subset)-1)],\n                         as.factor(data_subset[,NCOL(data_subset)]),\n                         method='knn')\n}\n",
+    "created" : 1498518099406.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2181595329",
+    "id" : "3E5752AD",
+    "lastKnownWriteTime" : 1500331762,
+    "last_content_update" : 1500331762,
+    "path" : "~/Dev/project-ada/src/R/MLAlgorithms/KNN_Algo.R",
+    "project_path" : "MLAlgorithms/KNN_Algo.R",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

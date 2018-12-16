@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "{\n    \"features_id\": \"knn_1\",\n    \"feature_columns\": {\n\t    \"RSI_rule\": {\n\t      \"feature_type\":\"RSI_rule\",\n\t      \"overbought\":70,\n\t      \"oversold\":30,\n\t      \"period\":9\n\t    },\n\t    \"RSI\": {\n\t      \"feature_type\":\"RSI\",\n\t      \"period\":9\n\t    },\n\t    \"ADX\": {\n\t      \"feature_type\":\"ADX\",\n\t      \"period\":7\n\t    },\n\t    \"ADX_rule\": {\n\t      \"feature_type\":\"ADX_rule\",\n\t      \"period\":7,\n\t      \"trending\":20\n\t    },\n\t    \"SMA_rule\":{\n\t      \"feature_type\":\"SMA_rule\",\n\t      \"period\":21\n\t    },\n\t    \"Volatility\":{\n\t      \"feature_type\":\"Volatility\",\n\t      \"period\":21\n\t    },\n\t   \"BB_rule\":{\n\t      \"feature_type\":\"BB_rule\",\n\t      \"sd\":1.5,\n\t      \"period\":21\n\t    }\n    },\n    \"frequency\": \"DAILY\"\n}\n",
+    "created" : 1498516108433.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3612480879",
+    "id" : "DA5EC4D9",
+    "lastKnownWriteTime" : 1500331762,
+    "last_content_update" : 1500331762,
+    "path" : "~/Dev/project-ada/features/configs/knn_technical.json",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "json"
+}
