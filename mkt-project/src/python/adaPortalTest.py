@@ -463,27 +463,12 @@ class Startup():
 
     def getHelpText(self):
         xmlstring = ''
-        xmlstring+= '<p>The Technical Heatmap is a component of TRENDS, an online Technical Strategy tool due to be launched in H1-09.</p>'
-        xmlstring+= ' <p>The Heatmap ranking and coloring of securities are based on a selection of the following technical signals:'
-        xmlstring+= ' <ul><li>Moving averages (5, 21)</li><li>Moving average crossover (5,21)</li>'
-        xmlstring+= ' <li>ADX (7) </li> <li>RSI (9)</li><li> Slow Stochastics (10-3-3)</li><li>MACD (26-13-9)</li><li>1-2 day Reversal patterns</li></ul>'
-        xmlstring+= ' Calculations are performed using a daily time horizon. We have chosen a subset of quantifiable technical'
-        xmlstring+= ' signals as not all signals lend themselves to quantification (for example, most patterns and intermarket relationships are difficult'
-        xmlstring+= ' to quantify). For the purposes of the heatmap,'
-        xmlstring+= ' the indicators are roughly equally weighted and automatically identified for each of 68 currency pairs. Due to the small '
-        xmlstring+= ' subset of technical signals evaluated, the displayed information may differ from our team view.'
-        xmlstring+= ' For further information on TRENDS, the Heatmap, or market views please contact the Barclays Capital Technical Strategy team. </p>'
-        xmlstring+= ' <p>The currencies analysed are the most liquid crosses of the following:'
-        xmlstring+= ' GBP, USD, EUR, CHF, JPY, AUD, NZD, CAD, NOK, SEK, TRY, HUF, PLN, SGD, KRW, INR, MXN, BRL, CLP, ZAR. Currencies, indicators,'
-        xmlstring+= ' and settings will be customisable when TRENDS is released.'
-        xmlstring+= ' The rankings of currencies are associated with a degree of bullishness or bearishness denoted by the color legend below.'
-        xmlstring+= ' </p>'
-        xmlstring+= ' <p><img src="/FXB/content/pfp/ada_gradient.gif"></img></p>'
+        xmlstring+= '<p>This heatmap gives forecasting indications for assets<p>'
         return xmlstring
 
 def adaPortal():
-        trendsPortal = Startup()
-        dateArray, dates = trendsPortal.backtestHeatMap()
+        adaPortal = Startup()
+        dateArray, dates = adaPortal.backtestHeatMap()
         f = open('backtest.csv', 'w')
         
         for secArray, dt in zip(dateArray, dates):
