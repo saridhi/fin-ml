@@ -3,19 +3,19 @@ Repository for machine learning related algorithms with a focus on financial tim
 
 Below is the description of folders in the root directory:
 
-1. deep-learning
+- deep-learning: 
 This contains a selection of five projects completed towards the Udacity Deep Learning Nanodegree using Neural Networks, GAN, RNN, NLP embeddings, and Reinforcement Learning
 
-2. whitepapers
+- whitepapers: 
 A selection of relevant papers that coincide with my interest, and also proposals/papers that I have written in order to pursue further reseearch
 
-3. ml-octave
+- ml-octave
 Following a Machine Learning refresher, some octave scripts to cover different parts of Machine Learning from SGD, Logistic Regressions, SVM, and K-means
 
-4. fx-arb
+- fx-arb
 A small project to determine if, given a csv and specified format, there is an arbitrage opportunity
 
-5. mkt-project
+- mkt-project
 At-home hobby project to unravel the challenge of financial timeseries forecasting. This contains various modules built away from my professional career, to explore the potential of domain knowledge applied to feature engineering in financial markets.
 
 
