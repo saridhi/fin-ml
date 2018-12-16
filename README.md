@@ -1,5 +1,5 @@
 # fin-ml
-Repository for machine learning related algorithms with a focus on financial timeseries forecasting using statistical learning models. The repository also contains several modules completed in educational and learning projects along with some hobby/interests that lie in financial market prediction space. ***These are all non-work related projects for experimentation, learning, and as a hobby.***
+Repository for machine learning related algorithms with a focus on financial timeseries forecasting using statistical learning models. The repository also contains several modules completed in educational and learning projects along with some hobby/interests that lie in financial market and other systematic prediction space. ***These are all non-work related projects for experimentation, learning, and as a hobby.***
 
 Below is the description of folders in the root directory:
 
