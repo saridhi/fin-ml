@@ -11,11 +11,9 @@ knitr::opts_chunk$set(echo = FALSE)
 library(lubridate)
 library(dplyr)
 library(plotly)
-library(snowflake.connector)
 library(googlesheets4)
 library(logging)
 library(tidyr)
-library(googledrive)
 library(stringr)
 ```
 
