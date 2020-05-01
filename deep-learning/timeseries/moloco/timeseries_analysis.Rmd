@@ -1,0 +1,90 @@
+---
+title: "timeseries_analysis"
+author: "Dhiren Sarin"
+date: "1/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(lubridate)
+library(dplyr)
+library(plotly)
+library(snowflake.connector)
+library(googlesheets4)
+library(logging)
+library(tidyr)
+library(googledrive)
+library(stringr)
+```
+
+```{r question_1, include = FALSE, message = TRUE, echo = TRUE}
+
+#Read from Sheet
+gsheet_url <- "https://docs.google.com/spreadsheets/d/1AV-A1uhQqvF6h0_a-fupFQIHv6W7-vNm88AYh_WzeB0/edit#gid=1326833441"
+content <- read_sheet(gsheet_url, sheet=1, col_types = 'c')
+
+
+#Consider only the rows with country_id = "BDV" (there are 844 such rows). 
+#For each site_id, we can compute the number of unique user_id's found in these 844 rows. 
+#Which site_id has the largest number of unique users? And what's the number?
+
+unique_counts <- content %>% filter(country_id == 'BDV') %>% group_by(site_id) %>% distinct(user_id) %>% count()
+```
+```{r question_1_output, include = TRUE, message = TRUE, echo = FALSE}
+print('Answer 1')
+unique_counts
+```
+
+```{r question_2, include = FALSE, message = TRUE, echo = TRUE}
+
+#Between 2019-02-03 00:00:00 and 2019-02-04 23:59:59, there are four users who visited a certain site more than 10 times. 
+# Find these four users & which sites they (each) visited more than 10 times. (Simply provides four triples in the form 
+#(user_id, # site_id, number of visits) in the box below.)
+
+content$ts <- as.POSIXct(content$ts)
+
+content_sub <- content[content$ts>'2019-02-03 00:00:00' & content$ts<'2019-02-04 23:59:59',]
+users_above_10 <- content_sub %>% group_by(user_id, site_id) %>% count() %>% filter(n>10)
+```
+
+```{r question_2_output, include = TRUE, message = TRUE, echo = FALSE}
+print('Answer 2')
+users_above_10
+```
+
+```{r question_3, include = FALSE, message = TRUE, echo = TRUE}
+
+#For each site, compute the unique number of users whose last visit (found in the original data set) was to that site. 
+#For instance, user "LC3561"'s last visit is to "N0OTG" based on timestamp data. Based on this measure, what are top three sites? 
+#(hint: site "3POLC" is ranked at 5th with 28 users whose last visit in the data set was to 3POLC; simply
+#provide three pairs in the form (site_id, number of users).)
+last_visits <- content %>% group_by(user_id) %>% arrange(ts) %>% slice(n()) %>% ungroup()
+
+top_3 <- last_visits %>% group_by(site_id) %>% distinct(user_id) %>% count() %>% arrange(n)
+```
+
+
+```{r question_3_output, include = TRUE, message = TRUE, echo = FALSE}
+print('Answer 3')
+tail(top_3, 3)
+```
+
+```{r question_4, include = FALSE, message = TRUE, echo = TRUE}
+
+#For each user, determine the first site he/she visited and the last site he/she visited based on the timestamp data. 
+#Compute the number of users whose first/last visits are to the same website. What is the number?
+
+first_visits <- content %>% group_by(user_id) %>% arrange(ts) %>% slice(1) %>% ungroup()
+joined_visits <- first_visits %>% left_join(last_visits, by="user_id")
+total_first_equal_last <- sum(joined_visits[,4]==joined_visits[,7])
+```
+
+
+```{r question_4_output, include = TRUE, message = TRUE, echo = FALSE}
+print('Answer 4')
+total_first_equal_last
+```
+
+
