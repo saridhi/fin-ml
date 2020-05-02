@@ -1,0 +1,77 @@
+---
+title: "regression_analysis"
+author: "Dhiren Sarin"
+date: "1/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(lubridate)
+library(dplyr)
+library(plotly)
+library(googlesheets4)
+library(logging)
+library(tidyr)
+library(stringr)
+library(plotly)
+```
+
+```{r question_II, include = FALSE, message = TRUE, echo = TRUE}
+
+#Read from Sheet
+gsheet_url <- "https://docs.google.com/spreadsheets/d/1AV-A1uhQqvF6h0_a-fupFQIHv6W7-vNm88AYh_WzeB0/edit#gid=1646189991"
+content <- read_sheet(gsheet_url, sheet=2, col_types = 'c', col_names = FALSE)
+colnames(content) <- c('A', 'B', 'C')
+content <- as.data.frame(content)
+content <- data.frame(lapply(content,as.numeric))
+```
+
+```{r relations, message = FALSE, fig.width = 10, fig.height = 4}
+print('Show relationships amongst variables visually')
+plot(content)
+```
+
+```{r xyplot, message = FALSE, fig.width = 10, fig.height = 4}
+print('A-B scatter plot')
+plot_ly(x=~A, y=~B, data = content, type = 'scatter')
+```
+
+```{r A, message = FALSE, fig.width = 10, fig.height = 4}
+print('A plot shows a level change from the 200th data point, can be controlled by a dummy variable')
+plot(content$A)
+```
+
+```{r B, message = FALSE, fig.width = 10, fig.height = 4}
+print('B plot looks fairly random/stochastic - avoiding tests of stationarity as the visual looks representative')
+plot(content$B)
+```
+```{r C, message = FALSE, fig.width = 10, fig.height = 4}
+print('C plot has a strong outlier at point 201')
+plot(content$C)
+```
+
+```{r dummy_var, message = FALSE, fig.width = 10, fig.height = 4}
+print('Autocorrelation for A - potentially two lags may be fitting, but none used as a useful model was found using the interaction effect (see below)')
+pacf(content$A)
+```
+
+```{r dummies, include = TRUE, message = TRUE, echo = TRUE}
+#Removing outlier
+content <- content[-c(201),]
+
+#Creating Dummy Variable
+content$D <- c(rep(0, 200), rep(1, NROW(content)-200))
+```
+```{r model, include = TRUE, message = TRUE, echo = TRUE}
+#Modeling with interactions with Dummy given the break and phase shift in underlying series after 200th point
+model <- lm(C ~ A * B * D, data=content)
+summary(model)
+```
+
+```{r residuals, include = TRUE, message = TRUE, echo = TRUE}
+#Residuals appear fairly stable
+resi <- model$residuals
+plot(resi)
+```
